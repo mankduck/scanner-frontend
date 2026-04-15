@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://luubut-backend.onrender.com";
 
 export async function createStudent(studentData) {
   const response = await fetch(`${API_URL}/students`, {
