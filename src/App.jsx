@@ -21,7 +21,7 @@ function App() {
         }}
       />
 
-      <div style={{ padding: "16px", textAlign: "center" }}>
+      {/* <div style={{ padding: "16px", textAlign: "center" }}>
         <Link to="/" style={{ marginRight: "12px" }}>
           Trang quét
         </Link>
@@ -29,7 +29,7 @@ function App() {
           Trang hiển thị
         </Link>
         <Link to="/generate-qr">Tạo QR</Link>
-      </div>
+      </div> */}
 
       <Routes>
         <Route path="/" element={<ScanPage />} />
