@@ -31,6 +31,19 @@ function DisplayPage() {
     }
   });
 
+  function speak(text) {
+  if (!window.speechSynthesis) return;
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "vi-VN"; // tiếng Việt
+  utterance.rate = 1;       // tốc độ
+  utterance.pitch = 1;      // cao độ
+
+  window.speechSynthesis.cancel(); // tránh đọc chồng
+  window.speechSynthesis.speak(utterance);
+}
+
   const [highlightId, setHighlightId] = useState(null);
   const highlightTimerRef = useRef(null);
 
@@ -52,6 +65,7 @@ function DisplayPage() {
     const handleStudentFound = (data) => {
       if (data.success && data.student) {
         const student = data.student;
+        speak(data.message);
 
         setStudents((prev) => {
           const exists = prev.find((s) => s.studentId === student.studentId);
@@ -78,6 +92,7 @@ function DisplayPage() {
         toast.error(data.message || "Học sinh không tồn tại", {
           duration: 3500,
         });
+        speak(data.message);
       }
     };
 
