@@ -33,7 +33,7 @@ function DisplayPage() {
   });
 
   useEffect(() => {
-    audioRef.current = new Audio("/sounds/ting.mp3");
+    audioRef.current = new Audio("/buy_1.mp3");
   }, []);
 
   function playSound() {
