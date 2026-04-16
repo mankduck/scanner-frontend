@@ -3,11 +3,11 @@ import { socket } from "../services/socket";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 
-const audioRef = useRef(null);
 const STORAGE_KEY = "checkedInStudents";
 const STORAGE_EXPIRE_MS = 60 * 60 * 1000; // 1 giờ
 
 function DisplayPage() {
+  const audioRef = useRef(null);
   const [students, setStudents] = useState(() => {
     try {
       const savedData = localStorage.getItem(STORAGE_KEY);
@@ -35,11 +35,11 @@ function DisplayPage() {
   useEffect(() => {
     audioRef.current = new Audio("/buy_1.mp3");
   }, []);
-
+  
   function playSound() {
     if (!audioRef.current) return;
   
-    audioRef.current.currentTime = 0; // reset để spam nhanh vẫn kêu
+    audioRef.current.currentTime = 0;
     audioRef.current.play().catch(() => {});
   }
 
