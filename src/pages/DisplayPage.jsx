@@ -3,6 +3,7 @@ import { socket } from "../services/socket";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 
+const audioRef = useRef(null);
 const STORAGE_KEY = "checkedInStudents";
 const STORAGE_EXPIRE_MS = 60 * 60 * 1000; // 1 giờ
 
@@ -30,6 +31,17 @@ function DisplayPage() {
       return [];
     }
   });
+
+  useEffect(() => {
+    audioRef.current = new Audio("/sounds/ting.mp3");
+  }, []);
+
+  function playSound() {
+    if (!audioRef.current) return;
+  
+    audioRef.current.currentTime = 0; // reset để spam nhanh vẫn kêu
+    audioRef.current.play().catch(() => {});
+  }
 
   function handleReset() {
     localStorage.removeItem(STORAGE_KEY);
@@ -90,7 +102,8 @@ function DisplayPage() {
     const handleStudentFound = (data) => {
       if (data.success && data.student) {
         const student = data.student;
-        speak(data.message);
+        playSound();
+        // speak(data.message);
 
         setStudents((prev) => {
           const exists = prev.find((s) => s.studentId === student.studentId);
@@ -117,7 +130,7 @@ function DisplayPage() {
         toast.error(data.message || "Học sinh không tồn tại", {
           duration: 3500,
         });
-        speak(data.message);
+        // speak(data.message);
       }
     };
 
