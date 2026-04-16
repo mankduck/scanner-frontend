@@ -7,53 +7,53 @@ const STORAGE_KEY = "checkedInStudents";
 const STORAGE_EXPIRE_MS = 60 * 60 * 1000; // 1 giờ
 
 function DisplayPage() {
-  const [students, setStudents] = useState(() => {
-    try {
-      const savedData = localStorage.getItem(STORAGE_KEY);
-      if (!savedData) return [];
+  // const [students, setStudents] = useState(() => {
+  //   try {
+  //     const savedData = localStorage.getItem(STORAGE_KEY);
+  //     if (!savedData) return [];
 
-      const parsed = JSON.parse(savedData);
-      const { data, savedAt } = parsed;
+  //     const parsed = JSON.parse(savedData);
+  //     const { data, savedAt } = parsed;
 
-      const now = Date.now();
-      const isExpired = !savedAt || now - savedAt > STORAGE_EXPIRE_MS;
+  //     const now = Date.now();
+  //     const isExpired = !savedAt || now - savedAt > STORAGE_EXPIRE_MS;
 
-      if (isExpired) {
-        localStorage.removeItem(STORAGE_KEY);
-        return [];
-      }
+  //     if (isExpired) {
+  //       localStorage.removeItem(STORAGE_KEY);
+  //       return [];
+  //     }
 
-      return Array.isArray(data) ? data : [];
-    } catch (error) {
-      console.error("Lỗi đọc localStorage:", error);
-      localStorage.removeItem(STORAGE_KEY);
-      return [];
-    }
+  //     return Array.isArray(data) ? data : [];
+  //   } catch (error) {
+  //     console.error("Lỗi đọc localStorage:", error);
+  //     localStorage.removeItem(STORAGE_KEY);
+  //     return [];
+  //   }
   });
 
-  function speak(text) {
-    if (!window.speechSynthesis) return;
+  // function speak(text) {
+  //   if (!window.speechSynthesis) return;
 
-    const utterance = new SpeechSynthesisUtterance(text);
+  //   const utterance = new SpeechSynthesisUtterance(text);
 
-    const voices = window.speechSynthesis.getVoices();
+  //   const voices = window.speechSynthesis.getVoices();
 
-    // 🔥 chọn giọng tiếng Việt
-    const vietnameseVoice =
-      voices.find((v) => v.lang === "vi-VN") ||
-      voices.find((v) => v.lang.includes("vi"));
+  //   // 🔥 chọn giọng tiếng Việt
+  //   const vietnameseVoice =
+  //     voices.find((v) => v.lang === "vi-VN") ||
+  //     voices.find((v) => v.lang.includes("vi"));
 
-    if (vietnameseVoice) {
-      utterance.voice = vietnameseVoice;
-    }
+  //   if (vietnameseVoice) {
+  //     utterance.voice = vietnameseVoice;
+  //   }
 
-    utterance.lang = "vi-VN";
-    utterance.rate = 0.95;
-    utterance.pitch = 1;
+  //   utterance.lang = "vi-VN";
+  //   utterance.rate = 0.95;
+  //   utterance.pitch = 1;
 
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
-  }
+  //   window.speechSynthesis.cancel();
+  //   window.speechSynthesis.speak(utterance);
+  // }
 
   const [highlightId, setHighlightId] = useState(null);
   const highlightTimerRef = useRef(null);
