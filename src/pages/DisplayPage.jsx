@@ -7,6 +7,7 @@ const STORAGE_KEY = "checkedInStudents";
 const STORAGE_EXPIRE_MS = 60 * 60 * 1000; // 1 giờ
 
 function DisplayPage() {
+  const audioRef = useRef(null);
   const [students, setStudents] = useState(() => {
     try {
       const savedData = localStorage.getItem(STORAGE_KEY);
@@ -30,6 +31,33 @@ function DisplayPage() {
       return [];
     }
   });
+
+
+  useEffect(() => {
+    audioRef.current = new Audio("/buy_1.mp3");
+  }, []);
+  
+  function playSound() {
+    if (!audioRef.current) return;
+  
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch(() => {});
+  }
+
+
+  function handleReset() {
+    localStorage.removeItem(STORAGE_KEY);
+    setStudents([]);
+    setHighlightId(null);
+  }
+
+  function handleReset() {
+    if (!window.confirm("Bạn có chắc muốn xoá toàn bộ danh sách?")) return;
+  
+    localStorage.removeItem(STORAGE_KEY);
+    setStudents([]);
+    setHighlightId(null);
+  }
 
   // function speak(text) {
   //   if (!window.speechSynthesis) return;
@@ -76,7 +104,8 @@ function DisplayPage() {
     const handleStudentFound = (data) => {
       if (data.success && data.student) {
         const student = data.student;
-        speak(data.message);
+        playSound();
+        // speak(data.message);
 
         setStudents((prev) => {
           const exists = prev.find((s) => s.studentId === student.studentId);
@@ -103,7 +132,7 @@ function DisplayPage() {
         toast.error(data.message || "Học sinh không tồn tại", {
           duration: 3500,
         });
-        speak(data.message);
+        // speak(data.message);
       }
     };
 
@@ -181,6 +210,22 @@ function DisplayPage() {
           transition={{ duration: 0.4 }}
           style={{ textAlign: "center", marginBottom: "32px" }}
         >
+          <button
+            onClick={handleReset}
+            style={{
+              marginTop: "16px",
+              padding: "10px 18px",
+              borderRadius: "999px",
+              border: "none",
+              background: "#ef4444",
+              color: "#fff",
+              fontWeight: 700,
+              cursor: "pointer",
+              boxShadow: "0 10px 20px rgba(239,68,68,0.25)",
+            }}
+          >
+            🔄 Reset danh sách
+          </button>
           <h1
             style={{
               margin: 0,
