@@ -42,9 +42,24 @@ function GenerateQRPage() {
     if (!canvas) return;
 
     const url = canvas.toDataURL("image/png");
+
+    const slugify = (text) => {
+      return text
+        .trim()
+        .toLowerCase()
+        .normalize("NFD") // tách dấu
+        .replace(/[\u0300-\u036f]/g, "") // xoá dấu
+        .replace(/đ/g, "d") // đổi đ -> d
+        .replace(/[^a-z0-9\s-]/g, "") // xoá ký tự đặc biệt
+        .replace(/\s+/g, "-") // space -> -
+        .replace(/-+/g, "-"); // gộp nhiều dấu -
+    };
+
+    const fileName = slugify(name || "hoc-sinh");
+
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${studentId || "student"}-qr.png`;
+    a.download = `${fileName}.png`;
     a.click();
   };
 

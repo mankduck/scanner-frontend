@@ -31,29 +31,29 @@ function DisplayPage() {
     }
   });
 
-  function speak(text) {
-    if (!window.speechSynthesis) return;
+  // function speak(text) {
+  //   if (!window.speechSynthesis) return;
 
-    const utterance = new SpeechSynthesisUtterance(text);
+  //   const utterance = new SpeechSynthesisUtterance(text);
 
-    const voices = window.speechSynthesis.getVoices();
+  //   const voices = window.speechSynthesis.getVoices();
 
-    // 🔥 chọn giọng tiếng Việt
-    const vietnameseVoice =
-      voices.find((v) => v.lang === "vi-VN") ||
-      voices.find((v) => v.lang.includes("vi"));
+  //   // 🔥 chọn giọng tiếng Việt
+  //   const vietnameseVoice =
+  //     voices.find((v) => v.lang === "vi-VN") ||
+  //     voices.find((v) => v.lang.includes("vi"));
 
-    if (vietnameseVoice) {
-      utterance.voice = vietnameseVoice;
-    }
+  //   if (vietnameseVoice) {
+  //     utterance.voice = vietnameseVoice;
+  //   }
 
-    utterance.lang = "vi-VN";
-    utterance.rate = 0.95;
-    utterance.pitch = 1;
+  //   utterance.lang = "vi-VN";
+  //   utterance.rate = 0.95;
+  //   utterance.pitch = 1;
 
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
-  }
+  //   window.speechSynthesis.cancel();
+  //   window.speechSynthesis.speak(utterance);
+  // }
 
   const [highlightId, setHighlightId] = useState(null);
   const highlightTimerRef = useRef(null);
