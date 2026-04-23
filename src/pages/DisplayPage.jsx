@@ -36,12 +36,12 @@ function DisplayPage() {
   useEffect(() => {
     audioRef.current = new Audio("/buy_1.mp3");
   }, []);
-  
+
   function playSound() {
     if (!audioRef.current) return;
-  
+
     audioRef.current.currentTime = 0;
-    audioRef.current.play().catch(() => {});
+    audioRef.current.play().catch(() => { });
   }
 
 
@@ -53,7 +53,7 @@ function DisplayPage() {
 
   function handleReset() {
     if (!window.confirm("Bạn có chắc muốn xoá toàn bộ danh sách?")) return;
-  
+
     localStorage.removeItem(STORAGE_KEY);
     setStudents([]);
     setHighlightId(null);
@@ -151,13 +151,29 @@ function DisplayPage() {
     <div
       style={{
         minHeight: "100vh",
-        background:
-          "linear-gradient(135deg, #dbeafe 0%, #ede9fe 35%, #fce7f3 70%, #fef3c7 100%)",
+        // background:
+        //   "linear-gradient(135deg, #dbeafe 0%, #ede9fe 35%, #fce7f3 70%, #fef3c7 100%)",
+        backgroundImage: "url('/bg.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         padding: "36px 24px 48px",
         position: "relative",
         overflow: "hidden",
       }}
     >
+      <img
+        src="/logo.png"
+        alt="logo"
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          width: "70px",
+          height: "auto",
+          zIndex: 10,
+        }}
+      />
       {/* bóng màu nền trang trí */}
       <div
         style={{
