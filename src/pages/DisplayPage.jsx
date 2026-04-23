@@ -252,7 +252,7 @@ function DisplayPage() {
               WebkitTextFillColor: "transparent",
             }}
           >
-            Danh sách học sinh đã điểm danh
+            Chào mừng bạn đã đến khu rừng diệu kì
           </h1>
 
           <p
