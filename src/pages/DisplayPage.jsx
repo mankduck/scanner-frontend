@@ -111,8 +111,7 @@ function DisplayPage() {
           const exists = prev.find((s) => s.studentId === student.studentId);
           if (exists) return prev;
 
-          // Quét trước ở bên trái, quét sau thêm sang phải
-          return [...prev, student];
+          return [student, ...prev];
         });
 
         setHighlightId(student.studentId);
