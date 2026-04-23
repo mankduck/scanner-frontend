@@ -167,7 +167,7 @@ function DisplayPage() {
         style={{
           position: "absolute",
           top: "20px",
-          left: "20px",
+          right: "20px",
           width: "70px",
           height: "auto",
           zIndex: 10,
@@ -245,6 +245,7 @@ function DisplayPage() {
             style={{
               margin: 0,
               fontSize: "46px",
+              paddingTop: "15px",
               fontWeight: 900,
               letterSpacing: "-0.03em",
               background: "linear-gradient(90deg, #4f46e5, #ec4899)",
